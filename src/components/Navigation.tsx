@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,12 +16,12 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Menu', href: '#menu' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Reservations', href: '#reservations' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Menu', href: '/menu' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Reservations', href: '/reservations' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -28,22 +30,26 @@ const Navigation = () => {
     }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-white">
+        <Link to="/" className="text-white">
           <h1 className="font-heading text-2xl md:text-3xl font-bold">
             Berna's <span className="text-golden">Bistro</span>
           </h1>
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
-              className="text-white hover:text-golden transition-colors duration-300 font-body font-medium"
+              to={item.href}
+              className={`transition-colors duration-300 font-body font-medium ${
+                location.pathname === item.href 
+                  ? 'text-golden' 
+                  : 'text-white hover:text-golden'
+              }`}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -61,14 +67,18 @@ const Navigation = () => {
         <div className="md:hidden bg-black/95 backdrop-blur-sm">
           <div className="px-6 py-4 space-y-4">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
-                className="block text-white hover:text-golden transition-colors duration-300 font-body font-medium"
+                to={item.href}
+                className={`block transition-colors duration-300 font-body font-medium ${
+                  location.pathname === item.href 
+                    ? 'text-golden' 
+                    : 'text-white hover:text-golden'
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
