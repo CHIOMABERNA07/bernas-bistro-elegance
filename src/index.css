@@ -2,41 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Berna's Bistro Luxury Design System
+Black #000000, White #FFFFFF, Golden #C9A227
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
+    /* Core Brand Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Elegant Black */
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Pure White */
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent: Luxury Golden */
+    --accent: 45 75% 45%;
+    --accent-foreground: 0 0% 0%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted tones for subtle elements */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 45 75% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Luxury Restaurant Specific Variables */
+    --golden: 45 75% 45%;
+    --golden-light: 45 75% 55%;
+    --golden-dark: 45 75% 35%;
+    
+    /* Typography Scale */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+    
+    /* Shadows & Effects */
+    --shadow-elegant: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-golden: 0 10px 30px -10px hsla(45, 75%, 45%, 0.3);
+    --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+    /* Gradients */
+    --gradient-golden: linear-gradient(135deg, hsl(45, 75%, 45%), hsl(45, 75%, 55%));
+    --gradient-dark: linear-gradient(135deg, hsl(0, 0%, 0%), hsl(0, 0%, 10%));
+    --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-elegant: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +130,80 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  /* Golden Button Variants */
+  .btn-golden {
+    @apply bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-medium px-8 py-3 rounded-lg;
+    background: var(--gradient-golden);
+    box-shadow: var(--shadow-golden);
+    transition: var(--transition-smooth);
+  }
+  
+  .btn-golden:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elegant);
+  }
+
+  /* Elegant Card Styles */
+  .card-elegant {
+    @apply bg-white rounded-xl p-8;
+    box-shadow: var(--shadow-elegant);
+    transition: var(--transition-elegant);
+  }
+
+  .card-elegant:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Section Headings */
+  .section-heading {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16;
+    font-family: var(--font-heading);
+    color: hsl(var(--primary));
+  }
+
+  /* Golden Accent Text */
+  .text-golden {
+    color: hsl(var(--golden));
+  }
+
+  /* Smooth Scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hero Overlay */
+  .hero-overlay {
+    background: var(--gradient-overlay);
+  }
+
+  /* Elegant Animation */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
